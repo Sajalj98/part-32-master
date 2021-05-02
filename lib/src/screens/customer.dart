@@ -14,18 +14,19 @@ class CustomerScreen extends StatefulWidget {
 }
 
 class _CustomerScreenState extends State<CustomerScreen> {
-  
-    StreamSubscription _userSubscription;
+  StreamSubscription _userSubscription;
 
   @override
   void initState() {
-    Future.delayed(Duration.zero, (){ 
-        var authBloc = Provider.of<AuthBloc>(context,listen: false);
-        _userSubscription = authBloc.user.listen((user) { 
-          if (user == null) Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
-        });
+    Future.delayed(Duration.zero, () {
+      var authBloc = Provider.of<AuthBloc>(context, listen: false);
+      _userSubscription = authBloc.user.listen((user) {
+        if (user == null)
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/login', (route) => false);
+      });
     });
-   
+
     super.initState();
   }
 
@@ -37,7 +38,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget image_carousel = new Container(
+    Widget imageCarousel = new Container(
       height: 200.0,
       child: new Carousel(
         boxFit: BoxFit.cover,
@@ -160,7 +161,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
       body: new ListView(
         children: <Widget>[
           // carousel
-          image_carousel,
+          imageCarousel,
           //padding
           new Padding(
               padding: const EdgeInsets.all(8.0),
@@ -190,5 +191,3 @@ class _CustomerScreenState extends State<CustomerScreen> {
     );
   }
 }
-
-    
