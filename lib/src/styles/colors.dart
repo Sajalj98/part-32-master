@@ -6,6 +6,7 @@ abstract class AppColors {
   static Color get lightgray => const Color(0xFFc8d6ef);
 
   static Color get darkblue => const Color(0xFF4CAF50);
+  // blue to green
 
   //Color(0xFF263a44);
 
