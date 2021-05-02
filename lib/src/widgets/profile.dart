@@ -27,7 +27,7 @@ class Profile extends StatelessWidget {
                 child: Text('Logout'),
                 onPressed: () => authBloc.logout(),
               )
-            : FlatButton(
+            : TextButton(
                 child: Text('Logout'),
                 onPressed: () => authBloc.logout(),
               ));

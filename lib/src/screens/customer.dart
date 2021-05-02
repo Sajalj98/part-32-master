@@ -8,6 +8,8 @@ import 'package:farmers_market/components/horizontal_listview.dart';
 import 'package:farmers_market/components/products.dart';
 import 'package:provider/provider.dart';
 
+import '../app.dart';
+
 class CustomerScreen extends StatefulWidget {
   @override
   _CustomerScreenState createState() => _CustomerScreenState();
@@ -38,6 +40,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var authBloc = Provider.of<AuthBloc>(context);
     Widget imageCarousel = new Container(
       height: 200.0,
       child: new Carousel(
@@ -58,6 +61,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
       ),
     );
     return Scaffold(
+      
       appBar: new AppBar(
         backgroundColor: Colors.green,
         title: Text('Agrispects'),
@@ -78,6 +82,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
         ],
       ),
       drawer: new Drawer(
+        
         child: new ListView(
           children: <Widget>[
             //header
@@ -155,6 +160,13 @@ class _CustomerScreenState extends State<CustomerScreen> {
                 leading: Icon(Icons.help, color: Colors.green),
               ),
             ),
+            InkWell(
+              onTap: () => authBloc.logout(),
+              child: ListTile(
+                title: Text('Logout'),
+                leading: Icon(Icons.logout, color: Colors.green),
+              ),
+            )
           ],
         ),
       ),
