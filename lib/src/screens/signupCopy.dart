@@ -79,34 +79,6 @@ class _SignupState extends State<Signup> {
             image: DecorationImage(image: AssetImage('assets/images/logo.png')),
           ),
         ),
-        StreamBuilder<String>(
-          stream: authBloc.email,
-          builder: (context, snapshot) {
-            return AppTextField(  
-              isIOS: Platform.isIOS,
-              hintText: 'Email',
-              cupertinoIcon: CupertinoIcons.mail_solid,
-              materialIcon: Icons.email,
-              textInputType: TextInputType.emailAddress,
-              errorText: snapshot.error,
-              onChanged: authBloc.changeEmail,
-            );
-          }
-        ),
-        StreamBuilder<String>(
-          stream: authBloc.password,
-          builder: (context, snapshot) {
-            return AppTextField( 
-              isIOS: Platform.isIOS,
-              hintText: 'Password',
-              cupertinoIcon: IconData(0xf4c9,fontFamily: CupertinoIcons.iconFont, fontPackage: CupertinoIcons.iconFontPackage),
-              materialIcon: Icons.lock,
-              obscureText: true,
-              errorText: snapshot.error,
-              onChanged: authBloc.changePassword,
-            );
-          }
-        ),
      StreamBuilder<String>(
           stream: authBloc.email,
           builder: (context, snapshot) {
