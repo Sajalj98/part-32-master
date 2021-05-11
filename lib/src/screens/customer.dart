@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:farmers_market/src/blocs/auth_bloc.dart';
+import 'package:farmers_market/src/screens/news_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
@@ -61,7 +62,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
       ),
     );
     return Scaffold(
-      
       appBar: new AppBar(
         backgroundColor: Colors.green,
         title: Text('Agrispects'),
@@ -78,11 +78,12 @@ class _CustomerScreenState extends State<CustomerScreen> {
               onPressed: () {}),
           new IconButton(
               icon: Icon(Icons.article_sharp, color: Colors.white),
-              onPressed: () {}),
+              onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
+                  //passing product details to the new page
+                  builder: (context) => new NewsScreen()))),
         ],
       ),
       drawer: new Drawer(
-        
         child: new ListView(
           children: <Widget>[
             //header
@@ -170,10 +171,9 @@ class _CustomerScreenState extends State<CustomerScreen> {
           ],
         ),
       ),
-      body: new ListView(
+      body: new Column(
         children: <Widget>[
-          // carousel
-          imageCarousel,
+          // carousel comenting imageCarousel,
           //padding
           new Padding(
               padding: const EdgeInsets.all(8.0),
@@ -194,8 +194,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                     color: Colors.green.withOpacity(1.0),
                     fontWeight: FontWeight.bold),
               )),
-          Container(
-            height: 320.0,
+          Flexible(
             child: Products(),
           )
         ],

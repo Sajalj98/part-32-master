@@ -32,6 +32,42 @@ class _ProductState extends State<Products> {
       "old_price": 50,
       "new_price": 55,
     },
+    {
+      "name": "Rice",
+      "picture": "assets/images/products/rice1.jpg",
+      "old_price": 30,
+      "new_price": 35,
+    },
+    {
+      "name": "Maize",
+      "picture": "assets/images/products/maize.jpg",
+      "old_price": 30,
+      "new_price": 35,
+    },
+    {
+      "name": "Jowar",
+      "picture": "assets/images/products/barley_green.jpg",
+      "old_price": 50,
+      "new_price": 55,
+    },
+    {
+      "name": "Rice",
+      "picture": "assets/images/products/rice1.jpg",
+      "old_price": 30,
+      "new_price": 35,
+    },
+    {
+      "name": "Maize",
+      "picture": "assets/images/products/maize.jpg",
+      "old_price": 30,
+      "new_price": 35,
+    },
+    {
+      "name": "Jowar",
+      "picture": "assets/images/products/barley_green.jpg",
+      "old_price": 50,
+      "new_price": 55,
+    },
   ];
 
   @override
@@ -41,11 +77,14 @@ class _ProductState extends State<Products> {
         gridDelegate:
             new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
-          return Singleprod(
-            prodName: productList[index]['name'],
-            prodPicture: productList[index]['picture'],
-            prodOldprice: productList[index]['old_price'],
-            prodPrice: productList[index]['new_price'],
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Singleprod(
+              prodName: productList[index]['name'],
+              prodPicture: productList[index]['picture'],
+              prodOldprice: productList[index]['old_price'],
+              prodPrice: productList[index]['new_price'],
+            ),
           );
         });
   }

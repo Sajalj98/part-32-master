@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:farmers_market/src/models/user.dart' as use;
@@ -22,7 +21,8 @@ class AuthBloc {
   //Get Data
   Stream<String> get email => _email.stream.transform(validateEmail);
   Stream<String> get password => _password.stream.transform(validatePassword);
-  Stream<bool> get isValid => CombineLatestStream.combine2(email, password, (email,password)=> true);
+  Stream<bool> get isValid =>
+      CombineLatestStream.combine2(email, password, (email, password) => true);
   Stream<use.User> get user => _user.stream;
   Stream<String> get errorMessage => _errorMessage.stream;
 
@@ -30,55 +30,60 @@ class AuthBloc {
   Function(String) get changeEmail => _email.sink.add;
   Function(String) get changePassword => _password.sink.add;
 
-  dispose(){
+  dispose() {
     _email.close();
     _password.close();
     _user.close();
     _errorMessage.close();
   }
 
-   currentUser() {
-         final User user = _auth.currentUser;
-         final uid = user.uid.toString();
-         return uid;
-      }
+  currentUser() {
+    final User user = _auth.currentUser;
+    final uid = user.uid.toString();
+    return uid;
+  }
 
   //Transformers
-  final validateEmail = StreamTransformer<String,String>.fromHandlers(handleData: (email, sink){
-    if (regExpEmail.hasMatch(email.trim())){
+  final validateEmail =
+      StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
+    if (regExpEmail.hasMatch(email.trim())) {
       sink.add(email.trim());
-    }else {
+    } else {
       sink.addError('Must Be Valid Email Address');
     }
   });
 
-    final validatePassword = StreamTransformer<String,String>.fromHandlers(handleData: (password, sink){
-    if (password.length >= 8){
+  final validatePassword = StreamTransformer<String, String>.fromHandlers(
+      handleData: (password, sink) {
+    if (password.length >= 8) {
       sink.add(password.trim());
-    }else {
+    } else {
       sink.addError('8 Character Minimum');
     }
   });
 
   //Functions
-  signupEmail() async{
-    try{
-      UserCredential authResult = await _auth.createUserWithEmailAndPassword(email: _email.value.trim(), password: _password.value.trim());
-      var user = use.User(userId: authResult.user.uid, email: _email.value.trim());
+  signupEmail() async {
+    try {
+      UserCredential authResult = await _auth.createUserWithEmailAndPassword(
+          email: _email.value.trim(), password: _password.value.trim());
+      var user =
+          use.User(userId: authResult.user.uid, email: _email.value.trim());
       await _firestoreService.addUser(user);
       _user.sink.add(user);
-    } on FirebaseAuthException catch (error){
+    } on FirebaseAuthException catch (error) {
       print(error);
       _errorMessage.sink.add(error.message);
     }
   }
 
-    loginEmail() async{
-    try{
-      UserCredential authResult = await _auth.signInWithEmailAndPassword(email: _email.value.trim(), password: _password.value.trim());
+  loginEmail() async {
+    try {
+      UserCredential authResult = await _auth.signInWithEmailAndPassword(
+          email: _email.value.trim(), password: _password.value.trim());
       var user = await _firestoreService.fetchUser(authResult.user.uid);
       _user.sink.add(user);
-    } on FirebaseAuthException catch (error){
+    } on FirebaseAuthException catch (error) {
       print(error);
       _errorMessage.sink.add(error.message);
     }
@@ -100,8 +105,7 @@ class AuthBloc {
     _user.sink.add(null);
   }
 
-  clearErrorMessage(){
+  clearErrorMessage() {
     _errorMessage.sink.add('');
   }
-
 }

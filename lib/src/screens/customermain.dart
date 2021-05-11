@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:farmers_market/components/horizontal_listview.dart';
 import 'package:farmers_market/components/products.dart';
+
 /*
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: HomePage()));
