@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:farmers_market/news/views/homepage.dart';
 import 'package:farmers_market/src/blocs/auth_bloc.dart';
 import 'package:farmers_market/src/screens/news_screen.dart';
 
